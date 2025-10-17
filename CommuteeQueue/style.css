@@ -154,6 +154,143 @@ body {
   color: white;
 }
 
+/* Search Bar */
+
+.search-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 50px;
+  gap: 15px;
+}
+
+.search-container input {
+  width: 450px;
+  padding: 12px 16px;
+  font-size: 20px;
+  border: none;
+  outline: none;
+  border-radius: 4px;
+  background-color: #fff;
+  color: #333;
+}
+
+.search-container button {
+  padding: 12px 24px;
+  background-color: #9DC183;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.search-container button:hover {
+  background-color: #9DC183;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .search-container {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .search-container input,
+  .search-container button {
+    width: 100%;
+    max-width: 280px;
+  }
+}
+
+/* TERMINAL CARDS STYLING */
+.terminal-container {
+  width: 100%;
+  margin: 40px auto 100px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.terminal-card {
+  background-color: white;
+  border: 2px solid #000;
+  border-radius: 8px;
+  padding: 20px 30px;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr 0.5fr;
+  align-items: center;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.terminal-card:hover {
+  transform: translateY(-3px);
+  transition: 0.3s ease;
+}
+
+/* Terminal Cards Section */
+#terminal-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 10px;
+  padding: 20px;
+  justify-items: center;
+}
+
+.card {
+  background-color: #fff;
+  border-radius: 15px;
+  padding: 20px 25px;
+  width: 100%;
+  max-width: 340px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card h3 {
+  color: #345c2a;
+  margin-bottom: 10px;
+}
+
+.card p {
+  margin: 5px 0;
+  font-size: 15px;
+}
+
+.status.waiting {
+  color: #e0a800;
+}
+
+.status.departed {
+  color: #c0392b;
+}
+
+/* Small bell button */
+.subscribe-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background-color: #8ebf76;
+  border: none;
+  border-radius: 50%;
+  color: #fff;
+  width: 30px;
+  height: 30px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.subscribe-btn:hover {
+  background-color: #6ea45b;
+}
+
 /* Footer */
 #footer {
   display: flex;
