@@ -1,3 +1,6 @@
-Henlo
+UPDATE: 10/17
 
-if hindi maayos ung link, paki-ayos na lang. nirerefer ko ung sa imgs ganon
+TERMINAL CARDS 
+SEARCH FUNCTIONALITY
+STATUSES
+
