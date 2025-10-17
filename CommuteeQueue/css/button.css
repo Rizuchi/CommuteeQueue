@@ -1,4 +1,4 @@
-.button-shopnow {
+.button-travel {
   background-color: #3DD1E7;
   border: 0 solid #E5E7EB;
   box-sizing: border-box;
@@ -24,11 +24,11 @@
   touch-action: manipulation;
 }
 
-.button-shopnow:focus {
+.button-travel:focus {
   outline: 0;
 }
 
-.button-shopnow:after {
+.button-travel:after {
   content: '';
   position: absolute;
   border: 1px solid #000000;
@@ -38,7 +38,7 @@
   height: calc(100% - 1px);
 }
 
-.button-shopnow:hover:after {
+.button-travel:hover:after {
   bottom: 2px;
   left: 2px;
 }
