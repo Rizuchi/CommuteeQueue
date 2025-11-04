@@ -11,22 +11,24 @@
 <body>
   
   <!-- Header -->
-  <section id="header">
-    <a href="index.html" class="logo-container">
+  <section id = "header">
+    <a href="index.html">
       <img src="image/logo.png" class="logo" alt="" width="60px">
-      <img src="image/user.svg" alt="" class="user-profile" width="20px">
       <span class="username-placeholder">User: CommuteeQueue User</span>
     </a>
 
-    <div>
+    <div id="nav-and-user-wrapper"> 
       <ul id="navbar">
         <li><a href="index.html">Home</a></li>
         <li><a class="active" href="terminals.html">Terminal</a></li>
-        <li><a href="#">About us</a></li>
-        <li><a href="#">Help</a></li>         
+        <li><a href="">About us</a></li>
+        <li><a href="">Help</a></li>         
       </ul>
+
+      <i class="fa-solid fa-right-from-bracket logout-icon" title="Logout" onclick="logout()"></i>
     </div>
-  </section>
+    
+    </section>
 
   <!-- Search Bar Section -->
   <section id="search-section">
@@ -56,9 +58,57 @@
   <div class="card">
     <button class="subscribe-btn"><i class="fa-solid fa-bell"></i></button>
     <h3>BALANGA - MARIVELES </h3>
-    <p><strong>Vehicle Type:</strong> JEEP </p>
+    <p><strong>Vehicle Type:</strong> E-Jeep </p>
     <p><strong>Departure Time:</strong> 3:10 Minutes</p>
     <p class="status departed">Departed</p>
+  </div>
+
+  <div class="card">
+    <button class="subscribe-btn"><i class="fa-solid fa-bell"></i></button>
+    <h3>BALANGA - OLONGAPO</h3>
+    <p><strong>Vehicle Type:</strong> Bus</p>
+    <p><strong>Departure Time:</strong> 3:10 Minutes</p>
+    <p class="status waiting">Waiting for passengers</p>
+  </div>
+
+  <div class="card">
+    <button class="subscribe-btn"><i class="fa-solid fa-bell"></i></button>
+    <h3>BALANGA - OLONGAPO</h3>
+    <p><strong>Vehicle Type:</strong> Bus</p>
+    <p><strong>Departure Time:</strong> 3:10 Minutes</p>
+    <p class="status departed">Departed</p>
+  </div>
+
+  <div class="card">
+    <button class="subscribe-btn"><i class="fa-solid fa-bell"></i></button>
+    <h3>BALANGA - BAGUIO</h3>
+    <p><strong>Vehicle Type:</strong> Bus</p>
+    <p><strong>Departure Time:</strong> 3:10 Minutes</p>
+    <p class="status waiting">Waiting for passengers</p>
+  </div>
+
+  <div class="card">
+    <button class="subscribe-btn"><i class="fa-solid fa-bell"></i></button>
+    <h3>BALANGA - OLONGAPO</h3>
+    <p><strong>Vehicle Type:</strong> Bus</p>
+    <p><strong>Departure Time:</strong> 3:10 Minutes</p>
+    <p class="status waiting">Waiting for passengers</p>
+  </div>
+
+  <div class="card">
+    <button class="subscribe-btn"><i class="fa-solid fa-bell"></i></button>
+    <h3>BALANGA - OLONGAPO</h3>
+    <p><strong>Vehicle Type:</strong> Bus</p>
+    <p><strong>Departure Time:</strong> 3:10 Minutes</p>
+    <p class="status departed">Departed</p>
+  </div>
+
+  <div class="card">
+    <button class="subscribe-btn"><i class="fa-solid fa-bell"></i></button>
+    <h3>BALANGA - DINALUPIHAN</h3>
+    <p><strong>Vehicle Type:</strong> Bus</p>
+    <p><strong>Departure Time:</strong> 3:10 Minutes</p>
+    <p class="status waiting">Waiting for passengers</p>
   </div>
 
   <div class="card">
@@ -79,55 +129,7 @@
 
   <div class="card">
     <button class="subscribe-btn"><i class="fa-solid fa-bell"></i></button>
-    <h3>BALANGA - OLONGAPO</h3>
-    <p><strong>Vehicle Type:</strong> Bus</p>
-    <p><strong>Departure Time:</strong> 3:10 Minutes</p>
-    <p class="status departed">Departed</p>
-  </div>
-
-  <div class="card">
-    <button class="subscribe-btn"><i class="fa-solid fa-bell"></i></button>
-    <h3>BALANGA - OLONGAPO</h3>
-    <p><strong>Vehicle Type:</strong> Bus</p>
-    <p><strong>Departure Time:</strong> 3:10 Minutes</p>
-    <p class="status departed">Departed</p>
-  </div>
-
-  <div class="card">
-    <button class="subscribe-btn"><i class="fa-solid fa-bell"></i></button>
-    <h3>BALANGA - OLONGAPO</h3>
-    <p><strong>Vehicle Type:</strong> Bus</p>
-    <p><strong>Departure Time:</strong> 3:10 Minutes</p>
-    <p class="status departed">Departed</p>
-  </div>
-
-  <div class="card">
-    <button class="subscribe-btn"><i class="fa-solid fa-bell"></i></button>
-    <h3>BALANGA - OLONGAPO</h3>
-    <p><strong>Vehicle Type:</strong> Bus</p>
-    <p><strong>Departure Time:</strong> 3:10 Minutes</p>
-    <p class="status departed">Departed</p>
-  </div>
-
-  <div class="card">
-    <button class="subscribe-btn"><i class="fa-solid fa-bell"></i></button>
-    <h3>BALANGA - OLONGAPO</h3>
-    <p><strong>Vehicle Type:</strong> Bus</p>
-    <p><strong>Departure Time:</strong> 3:10 Minutes</p>
-    <p class="status departed">Departed</p>
-  </div>
-
-  <div class="card">
-    <button class="subscribe-btn"><i class="fa-solid fa-bell"></i></button>
-    <h3>BALANGA - OLONGAPO</h3>
-    <p><strong>Vehicle Type:</strong> Bus</p>
-    <p><strong>Departure Time:</strong> 3:10 Minutes</p>
-    <p class="status departed">Departed</p>
-  </div>
-
-  <div class="card">
-    <button class="subscribe-btn"><i class="fa-solid fa-bell"></i></button>
-    <h3>BALANGA - OLONGAPO</h3>
+    <h3>BALANGA - MANILA</h3>
     <p><strong>Vehicle Type:</strong> Bus</p>
     <p><strong>Departure Time:</strong> 3:10 Minutes</p>
     <p class="status departed">Departed</p>
@@ -198,6 +200,8 @@
     });
   });
 </script>
+
+<script src="js/logout.js"></script>
 
 </body>
 </html>
