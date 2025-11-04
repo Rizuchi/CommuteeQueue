@@ -55,6 +55,7 @@ body {
   width: 100%;
   top: 0;
   left: 0;
+  overflow: hidden;
 }
 
 .username-placeholder {
@@ -72,12 +73,24 @@ body {
   text-decoration: none;
   display: flex;
   align-items: center;
+  gap: 10px;
 }
 
 #navbar {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  gap: 35px;
+  margin-left: auto;
+  margin-right: 0;
+}
+
+#nav-and-user-wrapper {
+    display: flex;
+    align-items: center;
+    /* Pushes this entire group (nav + user menu) to the far right, next to the logo container */
+    margin-left: auto; 
+    gap: 0; /* Ensures no gap between the #navbar UL and the .user-menu DIV */
 }
 
 #navbar li {
@@ -131,6 +144,17 @@ body {
   align-items: center;
 }
 
+.logout-icon {
+  font-size: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.logout-icon:hover {
+  color: #a93226;
+  transform: scale(1.1);
+}
+
 /* Hero Section */
 #hero {
   background-image: url("image/hero1.png");
@@ -154,8 +178,49 @@ body {
   color: white;
 }
 
-/* Search Bar */
+#terminal-preview {
+  text-align: center;
+}
 
+#terminal-preview h2 {
+  margin-bottom: 5px;
+}
+
+#terminal-preview .terminal-preview-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 30px;
+  margin-bottom: 40px;
+}
+
+#terminal-preview .card {
+  flex: 0 0 300px;
+  max-width: 100%;
+  background-color: #fff;
+  border-radius: 15px;
+  padding: 20px 25px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+#terminal-preview .card:hover {
+  transform: translateY(-5px);
+}
+
+#terminal-preview .card h3 {
+  color: #345c2a;
+  margin-bottom: 10px;
+}
+
+#terminal-preview .card p {
+  margin: 5px 0;
+  font-size: 15px;
+}
+
+/* Search Bar */
 .search-container {
   display: flex;
   align-items: center;

@@ -3,7 +3,7 @@ lp<!DOCTYPE html>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Home - Com</title>
+  <title>Home - CommuteeQueue</title>
   <link rel="icon" type="image/x-icon" href="image/logo.png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="style.css">
@@ -14,30 +14,58 @@ lp<!DOCTYPE html>
   <section id = "header">
     <a href="index.html">
       <img src="image/logo.png" class="logo" alt="" width="60px">
-      <img src="image/user.svg" alt="" class="user-profile" width="20px">
       <span class="username-placeholder">User: CommuteeQueue User</span>
     </a>
 
-    <div>
+    <div id="nav-and-user-wrapper"> 
       <ul id="navbar">
         <li><a class="active" href="index.html">Home</a></li>
         <li><a href="terminals.html">Terminal</a></li>
         <li><a href="About Us.html">About us</a></li>
         <li><a href="help.html">Help</a></li>         
       </ul>
+
+      <i class="fa-solid fa-right-from-bracket logout-icon" title="Logout" onclick="logout()"></i>
     </div>
-  </section>
+    
+    </section>
 
   <section id="hero">  
     <h2>Travel with ease</h2>
     <h2>With just one click!</h2>
     <p>Find your Destination</p>
     <a href="terminals.html">
-    <button class="button-travel" role="button">Travel</button>
+    <button class="button-shopnow" role="button">Travel</button>
     </a>
   </section>
   
+  <section id="terminal-preview" class="section-p1">
+    <h2>Popular Terminal Routes</h2>
+    <p>Check the latest departures from Balanga Terminal.</p>
+    <div class="terminal-preview-container">
+      
+      <div class="card">
+        <h3>BALANGA - OLONGAPO</h3>
+        <p><strong>Vehicle Type:</strong> Bus</p>
+        <p><strong>Departure Time:</strong> 2:10 PM</p>
+        <p class="status waiting">Waiting for passengers</p>
+      </div>
 
+      <div class="card">
+        <h3>BALANGA - ORANI</h3>
+        <p><strong>Vehicle Type:</strong> Jeep</p>
+        <p><strong>Departure Time:</strong> 3:10 PM</p>
+        <p class="status departed">Departed</p>
+      </div>
+
+      <div class="card">
+        <h3>BALANGA - BAGUIO</h3>
+        <p><strong>Vehicle Type:</strong> Bus</p>
+        <p><strong>Departure Time:</strong> 4:00 PM</p>
+        <p class="status waiting">Waiting for passengers</p>
+      </div>
+      
+    </div>
   </section>
 
   <!-- Footer -->
@@ -79,6 +107,8 @@ lp<!DOCTYPE html>
         <p>© 2025, CommuteeQueue - HTML CSS E-commerce</p>
     </div>
 </section>
+
+<script src="js/logout.js"></script>
 
 </body>
 </html>
