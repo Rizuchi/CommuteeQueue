@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard - CommuteeQueue</title>
+  <link rel="icon" href="image/logo.png" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="css/admin.css" />
+</head>
+<body>
+  <section id="header">
+    <a href="admin.html">
+      <img src="image/logo.png" class="logo" alt="" width="60px">
+      <span class="username-placeholder">Admin: Operator Panel</span>
+    </a>
+
+    <i class="fa-solid fa-right-from-bracket logout-icon" title="Logout" onclick="logout()"></i>
+  </section>
+
+  <section id="dashboard">
+    <section id="dashboard">
+    <h2>Transportation Dashboard</h2>
+    <p>Monitor and manage all active transport routes.</p>
+
+    <!-- Search -->
+    <div class="search-container">
+      <input type="text" id="search" placeholder="Search route or vehicle type...">
+      <button><i class="fa-solid fa-magnifying-glass"></i></button>
+    </div>
+
+    <tbody id="transport-body"></tbody>
+
+
+    <!-- Table Section -->
+    <div class="table-container">
+      <table id="transport-table">
+        <thead>
+          <tr>
+            <th>Route</th>
+            <th>Vehicle Type</th>
+            <th>Departure Time</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>BALANGA - OLONGAPO</td>
+            <td>Bus</td>
+            <td>2:10 PM</td>
+            <td class="status waiting">Waiting for passengers</td>
+            <td><button class="update-btn"><i class="fa-solid fa-pen"></i> Update</button></td>
+          </tr>
+          <tr>
+            <td>BALANGA - ORANI</td>
+            <td>Jeep</td>
+            <td>3:10 PM</td>
+            <td class="status departed">Departed</td>
+            <td><button class="update-btn"><i class="fa-solid fa-pen"></i> Update</button></td>
+          </tr>
+          <tr>
+            <td>BALANGA - MARIVELES</td>
+            <td>E-Jeep</td>
+            <td>3:10 Minutes</td>
+            <td class="status departed">Departed</td>
+            <td><button class="update-btn"><i class="fa-solid fa-pen"></i> Update</button></td>
+          </tr>
+          <tr>
+            <td>BALANGA - OLONGAPO</td>
+            <td>Bus</td>
+            <td>3:10 Minutes</td>
+            <td class="status waiting">Waiting for passengers</td>
+            <td><button class="update-btn"><i class="fa-solid fa-pen"></i> Update</button></td>
+          </tr>
+          <tr>
+            <td>BALANGA - OLONGAPO</td>
+            <td>Bus</td>
+            <td>3:10 Minutes</td>
+            <td class="status departed">Departed</td>
+            <td><button class="update-btn"><i class="fa-solid fa-pen"></i> Update</button></td>
+          </tr>
+          <tr>
+            <td>BALANGA - BAGUIO</td>
+            <td>Bus</td>
+            <td>3:10 Minutes</td>
+            <td class="status waiting">Waiting for passengers</td>
+            <td><button class="update-btn"><i class="fa-solid fa-pen"></i> Update</button></td>
+          </tr>
+          <tr>
+            <td>BALANGA - OLONGAPO</td>
+            <td>Bus</td>
+            <td>3:10 Minutes</td>
+            <td class="status waiting">Waiting for passengers</td>
+            <td><button class="update-btn"><i class="fa-solid fa-pen"></i> Update</button></td>
+          </tr>
+          <tr>
+            <td>BALANGA - OLONGAPO</td>
+            <td>Bus</td>
+            <td>3:10 Minutes</td>
+            <td class="status departed">Departed</td>
+            <td><button class="update-btn"><i class="fa-solid fa-pen"></i> Update</button></td>
+          </tr>
+          <tr>
+            <td>BALANGA - DINALUPIHAN</td>
+            <td>Bus</td>
+            <td>3:10 Minutes</td>
+           <td class="status waiting">Waiting for passengers</td>
+            <td><button class="update-btn"><i class="fa-solid fa-pen"></i> Update</button></td>
+          </tr>
+          <tr>
+            <td>BALANGA - OLONGAPO</td>
+            <td>Bus</td>
+            <td>3:10 Minutes</td>
+            <td class="status departed">Departed</td>
+            <td><button class="update-btn"><i class="fa-solid fa-pen"></i> Update</button></td>
+          </tr>
+          <tr>
+            <td>BALANGA - OLONGAPO</td>
+            <td>Bus</td>
+           <td>3:10 Minutes</td>
+            <td class="status departed">Departed</td>
+            <td><button class="update-btn"><i class="fa-solid fa-pen"></i> Update</button></td>
+          </tr>
+          <tr>
+            <td>BALANGA - MANILA</td>
+            <td>Bus</td>
+            <td>3:10 Minutes</td>
+            <td class="status departed">Departed</td>
+            <td><button class="update-btn"><i class="fa-solid fa-pen"></i> Update</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+
+    <button class="admin-btn rfid-btn" onclick="rfidScan()">Activate RFID</button>
+
+  <!-- Footer -->
+  <section id="footer" class="section-p1">
+    <div class="col">
+      <img class="logo" src="image/logo.png" alt="" width="60px">
+      <h4>Contact</h4>
+      <p><strong>Address:</strong> Balanga, Bataan</p>
+      <p><strong>Phone:</strong> 0991-Queue</p>
+      <p><strong>Hours:</strong> Open 25/8</p>
+      <div class="follow">
+        <h4>Follow Us</h4>
+        <div class="icon">
+          <i class="fab fa-facebook-f"></i>
+          <i class="fab fa-twitter"></i>
+          <i class="fab fa-instagram"></i>
+          <i class="fab fa-pinterest-p"></i>
+          <i class="fab fa-youtube"></i>
+        </div>
+      </div>
+    </div>
+
+    <div class="col">
+      <h4>About</h4>
+      <a href="#">About Us</a>
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms & Conditions</a>
+      <a href="#">Contact Us</a>
+    </div>
+
+    <div class="col install">
+      <h4>Install App</h4>
+      <p>From App Store or Google Play</p>
+      <p>Secured Payment Gateways</p>
+      <img src="image/pay.png" alt="">
+    </div>
+
+    <div class="copyright">
+      <p>© 2025, CommuteeQueue - Admin Dashboard</p>
+    </div>
+  </section>
+
+  <script>
+    function rfidScan() {
+      alert("RFID Scanner Activated - Waiting for Tag...");
+    }
+
+    const search = document.getElementById("search");
+    const rows = document.querySelectorAll("#transport-table tbody tr");
+
+    search.addEventListener("keyup", () => {
+      const query = search.value.toLowerCase();
+      rows.forEach(row => {
+        row.style.display = row.innerText.toLowerCase().includes(query) ? "" : "none";
+      });
+    });
+
+  </script>
+
+  <script src="js/data.js"></script>
+  <script src="js/logout.js"></script>
+
+</body>
+</html>
