@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Help | CommuteeQueue</title>
+  <link rel="icon" type="image/x-icon" href="image/favicon.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="css/button.css">
+  <link rel="icon" type="image/x-icon" href="image/logo.png">
+
+  <style>
+    body {
+      padding-top: 150px;
+      font-family: "Poppins", sans-serif;
+    }
+
+    .help-section {
+      background-color: #faf6e9;
+      padding: 60px 20px;
+    }
+
+    .help-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .help-container h2 {
+      font-size: 36px;
+      margin-bottom: 15px;
+      color: #1a1a1a;
+    }
+
+    .help-container p {
+      font-size: 16px;
+      margin-bottom: 30px;
+      color: #465b52;
+    }
+
+    .help-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      justify-content: center;
+    }
+
+    .help-box {
+      background-color: #fffaf0;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+      flex: 1 1 300px;
+      text-align: left;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .help-box:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.12);
+    }
+
+    .help-box h3 {
+      font-size: 20px;
+      color: #1e7c9a;
+      margin-bottom: 10px;
+    }
+
+    .help-box ul {
+      padding-left: 20px;
+    }
+
+    .help-box li {
+      margin-bottom: 15px;
+      color: #333;
+    }
+
+    /* --- Report Section --- */
+    .report-section {
+      background-color: #fff4e0;
+      padding: 50px 20px;
+      text-align: center;
+      border-top: 3px solid #f4a261;
+    }
+
+    .report-section h3 {
+      font-size: 24px;
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    .report-form {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .report-form textarea {
+      width: 100%;
+      height: 120px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      padding: 15px;
+      font-size: 1rem;
+      resize: none;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .report-form textarea:focus {
+      border-color: #9DC183;
+    }
+
+    .report-form button {
+      margin-top: 15px;
+      background-color: #9DC183;
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      font-size: 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    .report-form button:hover {
+      background-color: #9DC183;
+    }
+
+    .report-msg {
+      color: #2a9d8f;
+      margin-top: 10px;
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 768px) {
+      .help-grid {
+        flex-direction: column;
+      }
+    }
+
+   .report-btn {
+    background-color: #9DC183;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    font-size: 0.95rem;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+
+.report-btn:hover {
+  background-color: #21867a;
+  transform: translateY(-2px);
+}
+  </style>
+</head>
+<body>
+  <section id="header">
+    <a href="index.html">
+      <img src="image/logo.png" class="logo" alt="" width="60px">
+      <img src="image/user.svg" alt="" class="user-profile" width="20px">
+      <span class="username-placeholder">User: CommuteeQueue User</span>
+    </a>
+
+    <div>
+      <ul id="navbar">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="terminals.html">Terminals</a></li>
+        <li><a href="About Us.html">About us</a></li>
+        <li><a class="active" href="help.html">Help</a></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Help Section -->
+  <section class="help-section">
+    <div class="help-container">
+      <h2>Need Help?</h2>
+      <p>We’re here to support you. Find answers to common questions or reach out directly to our customer care team.</p>
+
+      <div class="help-grid">
+        <div class="help-box">
+          <h3>📞 Customer Support</h3>
+          <p>If you have issues with your account, orders, or payments, our team is ready to assist.</p>
+          <p><strong>Phone:</strong> +63 915 4926 350<br>
+          <strong>Email:</strong> castorice_commuteequeue@gmail.com</p>
+        </div>
+
+        <div class="help-box">
+          <h3>❓ Frequently Asked Questions</h3>
+          <ul>
+            <li><strong>Who is it created for?</strong><br>It’s made mainly for commuters who want quick and reliable transport updates, but transport operators can also use it to track active vehicles.</li>
+            <li><strong>How is my data protected?</strong><br>We use secure encryption and account authentication to protect your data.</li>
+            <li><strong>Why was it created?</strong><br>To make commuting easier and more convenient by giving everyone accurate and up-to-date information.</li>
+          </ul>
+        </div>
+
+        <div class="help-box">
+            <h3>🛠 Technical Support</h3>
+            <p>Encountering bugs or issues with the website? Report them to our tech support team.</p>
+            <p><strong>Email:</strong> support@CommuteeQueue.ph</p>
+            <button class="report-btn" onclick="scrollToReport()">Report a Problem</button>
+        </div>
+
+        <div class="help-box">
+            <h3>Help our Site!</h3>
+            <p>We highly encourage every user to participate in improving our website in your own opinion. </p>
+            <p>
+              <a href="https://docs.google.com/forms/d/e/1FAIpQLSdjom-i3yQyVgsviTY64tIYFfpXgJgGkubhVuiTUSFZSHJGAQ/viewform?fbclid=IwY2xjawN2i7VleHRuA2FlbQIxMABicmlkETFyMEhrVnBycDhlM0JXOW4yAR6vAUx68jhhEc5RFn-pElLsji4T77paN1x_yna3GIO2VmIrPTGBVO-mxdtHKQ_aem_zHUlipEOTodjxJnnkacxnw" 
+                target="_blank" 
+                rel="noopener noreferrer">Every opinions matter!
+              </a>
+            </p>
+
+            
+            
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Report an Issue -->
+  <section class="report-section">
+    <h3>Report an Issue</h3>
+    <div class="report-form">
+      <textarea id="reportInput" placeholder="Describe the issue you encountered..."></textarea>
+      <button onclick="submitReport()">Submit Report</button>
+      <p class="report-msg" id="reportMsg"></p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <section id="footer" class="section-p1">
+    <div class="col">
+        <img class="logo" src="image/logo.png" alt="" width="60px">
+        <h4>Contact</h4>
+        <p><strong>Address:</strong>Balanga, Bataan</p>
+        <p><strong>Phone:</strong>0991-Queue</p>
+        <p><strong>Hours:</strong>Open 25/8</p>
+        <div class="follow">
+            <h4>Follow Us</h4>
+            <div class="icon">
+                <a href="https://www.facebook.com/nellnellcunanan9" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://x.com/pritongwaters" target="_blank"><i class="fab fa-twitter"></i></a>
+                <a href="https://www.instagram.com/rizucrz" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.pinterest.com/" target="_blank"><i class="fab fa-pinterest-p"></i></a>
+                <a href="https://www.youtube.com/watch?v=xvFZjo5PgG0" target="_blank"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col">
+        <h4>About</h4>
+        <a href="#">About Us</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms & Conditions</a>
+        <a href="#">Contact Us</a>
+    </div>
+
+    <div class="col install">
+        <h4>Install App</h4>
+        <p>From App Store or Google Play</p>
+        <p>Secured Payment Gateways</p>
+        <img src="image/pay.png" alt="">
+    </div>
+
+    <div class="copyright">
+        <p>© 2025, CommuteeQueue - HTML CSS E-commerce</p>
+    </div>
+</section>
+
+  <script>
+    function submitReport() {
+      const input = document.getElementById('reportInput');
+      const msg = document.getElementById('reportMsg');
+
+      if (input.value.trim() === '') {
+        msg.style.color = 'red';
+        msg.textContent = 'Please describe your issue before submitting.';
+        return;
+      }
+
+      msg.style.color = '#2a9d8f';
+      msg.textContent = '✅ Thank you! Your report has been submitted successfully.';
+      input.value = '';
+    }
+    
+    function scrollToReport() {
+  document.querySelector('.report-section').scrollIntoView({ 
+    behavior: 'smooth' 
+  });
+}
+  </script>
+</body>
+</html>
