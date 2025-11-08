@@ -161,17 +161,18 @@
   <section id="header">
     <a href="index.html">
       <img src="image/logo.png" class="logo" alt="" width="60px">
-      <img src="image/user.svg" alt="" class="user-profile" width="20px">
       <span class="username-placeholder">User: CommuteeQueue User</span>
     </a>
 
-    <div>
+    <div id="nav-and-user-wrapper">
       <ul id="navbar">
         <li><a href="index.html">Home</a></li>
         <li><a href="terminals.html">Terminals</a></li>
         <li><a href="About Us.html">About us</a></li>
         <li><a class="active" href="help.html">Help</a></li>
       </ul>
+
+      <i class="fa-solid fa-right-from-bracket logout-icon" title="Logout" onclick="logout()"></i>
     </div>
   </section>
 
@@ -271,6 +272,7 @@
         <p>© 2025, CommuteeQueue - HTML CSS E-commerce</p>
     </div>
 </section>
+  <script src="js/logout.js"></script>
   <script src="notification.js"></script>
   <script>
     function submitReport() {

@@ -1,87 +1,129 @@
-lp<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Home | CommuteeQueue</title>
+  <title>Home - CommuteeQueue</title>
   <link rel="icon" type="image/x-icon" href="image/logo.png">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="css/button.css">
 </head>
+
 <body>
-  
-  <section id = "header">
-    <a href="index.html">
-      <img src="image/logo.png" class="logo" alt="" width="60px">
-      <img src="image/user.svg" alt="" class="user-profile" width="20px">
+  <!-- ===== HEADER ===== -->
+  <section id="header">
+    <a href="index.html" class="logo-container">
+      <img src="image/logo.png" class="logo" alt="" width="60">
       <span class="username-placeholder">User: CommuteeQueue User</span>
     </a>
 
-    <div>
+    <div id="nav-and-user-wrapper">
       <ul id="navbar">
         <li><a class="active" href="index.html">Home</a></li>
         <li><a href="terminals.html">Terminal</a></li>
         <li><a href="About Us.html">About us</a></li>
-        <li><a href="help.html">Help</a></li>         
+        <li><a href="help.html">Help</a></li>
       </ul>
+      <i class="fa-solid fa-right-from-bracket logout-icon" title="Logout" onclick="logout()"></i>
     </div>
   </section>
+ 
 
-  <section id="hero">  
+  <!-- ===== HERO ===== -->
+  <section id="hero">
     <h2>Travel with ease</h2>
     <h2>With just one click!</h2>
     <p>Find your Destination</p>
-    <a href="terminals.html">
-    <button class="button-travel" role="button">Travel</button>
-    </a>
-  </section>
-  
-
+    <a href="terminals.html"><button class="button-travel" role="button">Travel</button></a>
   </section>
 
-  <!-- Footer -->
+  <!-- ===== ADVISORY BANNER ===== -->
+   <div class="advisory-banner">
+    <i class="fa-solid fa-triangle-exclamation"></i>
+    <span id="advisoryText">Loading advisories...</span>
+    <a href="#" id="viewDetails">🛈 View Details</a>
+  </div>
+
+  <!-- ===== FEATURE SECTION ===== -->
+  <section id="features">
+  <h2 class="feature-title">Why Choose CommuteeQueue?</h2>
+  <div class="feature-grid">
+    <div class="feature-card">
+      <i class="fa-solid fa-bus"></i>
+      <h3>Real-Time Transport Updates</h3>
+      <p>Stay informed with live schedules and accurate departure times.</p>
+    </div>
+    <div class="feature-card">
+      <i class="fa-solid fa-location-dot"></i>
+      <h3>Terminal Information</h3>
+      <p>Find terminals easily and plan your route efficiently.</p>
+    </div>
+    <div class="feature-card">
+      <i class="fa-solid fa-bell"></i>
+      <h3>Smart Notifications</h3>
+      <p>Get instant alerts for boarding, delays, or route changes.</p>
+    </div>
+    <div class="feature-card">
+      <i class="fa-solid fa-mobile-screen-button"></i>
+      <h3>Seamless Experience</h3>
+      <p>Accessible anytime, anywhere on your device of choice.</p>
+    </div>
+  </div>
+</section>
+
+  <!-- ===== FOOTER ===== -->
   <section id="footer" class="section-p1">
     <div class="col">
-        <img class="logo" src="image/logo.png" alt="" width="60px">
-        <h4>Contact</h4>
-        <p><strong>Address:</strong>Balanga, Bataan</p>
-        <p><strong>Phone:</strong>0991-Queue</p>
-        <p><strong>Hours:</strong>Open 25/8</p>
-        <div class="follow">
-            <h4>Follow Us</h4>
-            <div class="icon">
-                <i class="fab fa-facebook-f"></i>
-                <i class="fab fa-twitter"></i>
-                <i class="fab fa-instagram"></i>
-                <i class="fab fa-pinterest-p"></i>
-                <i class="fab fa-youtube"></i>
-            </div>
+      <img class="logo" src="image/logo.png" alt="" width="60">
+      <h4>Contact</h4>
+      <p><strong>Address:</strong> Balanga, Bataan</p>
+      <p><strong>Phone:</strong> 0991-Queue</p>
+      <p><strong>Hours:</strong> Open 25/8</p>
+      <div class="follow">
+        <h4>Follow Us</h4>
+        <div class="icon">
+          <i class="fab fa-facebook-f"></i>
+          <i class="fab fa-twitter"></i>
+          <i class="fab fa-instagram"></i>
+          <i class="fab fa-pinterest-p"></i>
+          <i class="fab fa-youtube"></i>
         </div>
+      </div>
     </div>
 
     <div class="col">
-        <h4>About</h4>
-        <a href="#">About Us</a>
-        <a href="#">Privacy Policy</a>
-        <a href="#">Terms & Conditions</a>
-        <a href="#">Contact Us</a>
+      <h4>About</h4>
+      <a href="#">About Us</a>
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms & Conditions</a>
+      <a href="#">Contact Us</a>
     </div>
 
     <div class="col install">
-        <h4>Install App</h4>
-        <p>From App Store or Google Play</p>
-        <p>Secured Payment Gateways</p>
-        <img src="image/pay.png" alt="">
+      <h4>Install App</h4>
+      <p>From App Store or Google Play</p>
+      <p>Secured Payment Gateways</p>
+      <img src="image/pay.png" alt="">
     </div>
 
     <div class="copyright">
-        <p>© 2025, CommuteeQueue - HTML CSS E-commerce</p>
+      <p>© 2025, CommuteeQueue - HTML CSS E-commerce</p>
     </div>
-</section>
+  </section>
+
+  <!-- ===== MODAL ===== -->
+  <div id="advisoryModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h3>Advisory Details</h3>
+      <p>More details coming soon.</p>
+    </div>
+  </div>
+
+  <!-- ===== SCRIPTS ===== -->
   <script src="notification.js"></script>
+  <script src="js/advisory.js"></script>
+  <script src="js/logout.js"></script>
 </body>
-  
 </html>
-
-
