@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard - CommuteeQueue</title>
+  <link rel="icon" href="image/logo.png" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="css/admin.css" />
+</head>
+<body>
+  <section id="header">
+    <a href="admin.html">
+      <img src="image/logo.png" class="logo" alt="" width="60px">
+      <span class="username-placeholder">Admin: Operator Panel</span>
+    </a>
+
+    <i class="fa-solid fa-right-from-bracket logout-icon" title="Logout" onclick="logout()"></i>
+  </section>
+
+  <section id="dashboard">
+    <section id="dashboard">
+    <h2>Transportation Dashboard</h2>
+    <p>Monitor and manage all active transport routes.</p>
+
+    <div class="search-container">
+      <input type="text" id="search" placeholder="Search route or vehicle type...">
+      <button><i class="fa-solid fa-magnifying-glass"></i></button>
+    </div>
+
+    <tbody id="transport-body"></tbody>
+
+
+    <div class="table-container">
+      <table id="transport-table">
+        <thead>
+          <tr>
+            <th>Route</th>
+            <th>Vehicle Type</th>
+            <th>Departure Time</th> 
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          </tbody>
+      </table>
+    </div>
+  </section>
+
+
+    <button class="admin-btn rfid-btn" onclick="rfidScan()">Activate RFID</button>
+
+  <section id="footer" class="section-p1">
+    <div class="col">
+      <img class="logo" src="image/logo.png" alt="" width="60px">
+      <h4>Contact</h4>
+      <p><strong>Address:</strong> Balanga, Bataan</p>
+      <p><strong>Phone:</strong> 0991-Queue</p>
+      <p><strong>Hours:</strong> Open 25/8</p>
+      <div class="follow">
+        <h4>Follow Us</h4>
+        <div class="icon">
+          <i class="fab fa-facebook-f"></i>
+          <i class="fab fa-twitter"></i>
+          <i class="fab fa-instagram"></i>
+          <i class="fab fa-pinterest-p"></i>
+          <i class="fab fa-youtube"></i>
+        </div>
+      </div>
+    </div>
+
+    <div class="col">
+      <h4>About</h4>
+      <a href="#">About Us</a>
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms & Conditions</a>
+      <a href="#">Contact Us</a>
+    </div>
+
+    <div class="col install">
+      <h4>Install App</h4>
+      <p>From App Store or Google Play</p>
+      <p>Secured Payment Gateways</p>
+      <img src="image/pay.png" alt="">
+    </div>
+
+    <div class="copyright">
+      <p>© 2025, CommuteeQueue - Admin Dashboard</p>
+    </div>
+  </section>
+
+  <script>
+    // --- Data Configuration ---
+    const TERMINALS = ["BALANGA -", "VICTORY LINER BALANGA -", "BATAAN TRANSIT BALANGA -"];
+    const DESTINATIONS = [
+      "OLONGAPO", "ORANI", "MARIVELES", "DINALUPIHAN", "BAGUIO", "MANILA", "LIMAY", "LAMAO",
+      "ABUCAY", "BNAS", "MORONG", "CUBAO", "PAMPANGA", "AVENIDA", "TARLAC SIESTA"
+    ];
+    const VEHICLES = ["Bus", "Jeep", "Mini Bus", "E-Jeep"];
+    const MAX_ACTIVE_ROUTES = 10; 
+
+    let activeRoutes = [];
+    const tableBody = document.querySelector("#transport-table tbody");
+
+    // --- Utility Functions ---
+
+    function getRandomItem(arr) {
+      return arr[Math.floor(Math.random() * arr.length)];
+    }
+
+    function createRandomRoute() {
+      const terminal = getRandomItem(TERMINALS);
+      const destination = getRandomItem(DESTINATIONS);
+      const routeName = `${terminal} ${destination}`;
+      const vehicle = getRandomItem(VEHICLES);
+      
+      // Random initial time between 1 second and 10 seconds
+      const MIN_SECONDS = 1;
+      const MAX_SECONDS = 10; 
+      const initialTime = Math.floor(Math.random() * (MAX_SECONDS - MIN_SECONDS + 1)) + MIN_SECONDS;
+
+      return {
+        id: Date.now() + Math.random(), 
+        route: routeName,
+        vehicle: vehicle,
+        timerValue: initialTime, 
+        status: "Waiting for passengers",
+        // Used only when status is 'Departed'
+        departedTimer: 0
+      };
+    }
+    
+    // Function to create a new row DOM element
+    function createRowElement(route) {
+        const row = document.createElement('tr');
+        row.setAttribute('data-route-id', route.id);
+        
+        row.insertCell().textContent = route.route;
+        row.insertCell().textContent = route.vehicle;
+        
+        // Timer cell has a class for easy access
+        const timerCell = row.insertCell();
+        timerCell.classList.add('timer-cell');
+        // Initial content is set in initialRenderTable/updateDashboard
+        timerCell.textContent = '00:00'; 
+        
+        const statusCell = row.insertCell();
+        statusCell.classList.add('status-cell');
+        statusCell.innerHTML = `<td class="status waiting">${route.status}</td>`; 
+
+        const actionCell = row.insertCell();
+        actionCell.innerHTML = '<button class="update-btn"><i class="fa-solid fa-pen"></i> Update</button>';
+        
+        return row;
+    }
+
+    // --- Dashboard Logic ---
+
+    // Initial table render (runs only once)
+    function initialRenderTable() {
+        if (!tableBody) return;
+        for (let i = 0; i < MAX_ACTIVE_ROUTES; i++) {
+          const route = createRandomRoute();
+          activeRoutes.push(route);
+          tableBody.appendChild(createRowElement(route));
+        }
+        applySearchFilter();
+    }
+
+    // The main loop that handles the timer and DOM updates
+    function updateDashboard() {
+      let routesToReplaceCount = 0;
+      let newActiveRoutes = [];
+
+      // Identify routes that need structural changes (removal/status change)
+      const departedIds = [];
+
+      activeRoutes.forEach(route => {
+        const row = tableBody.querySelector(`[data-route-id="${route.id}"]`);
+        
+        if (route.status === 'Departed') {
+            // Case 1: Route is in 5-second delay
+            route.departedTimer -= 1;
+            
+            if (route.departedTimer <= 0) {
+                // Time for replacement
+                routesToReplaceCount++;
+                departedIds.push(route.id); // Mark for DOM removal
+            } else {
+                // Keep route in the list for the delay duration
+                newActiveRoutes.push(route);
+            }
+            return;
+        }
+
+        // Case 2: Route is still counting down
+        route.timerValue -= 1;
+
+        if (route.timerValue > 0) {
+            // Update ONLY the timer cell content (prevents row moving/flickering)
+            if (row) {
+                const timerCell = row.querySelector('.timer-cell');
+                const minutes = Math.floor(route.timerValue / 60).toString().padStart(2, '0');
+                const seconds = Math.floor(route.timerValue % 60).toString().padStart(2, '0');
+                timerCell.textContent = `${minutes}:${seconds}`;
+            }
+            newActiveRoutes.push(route);
+        } else {
+            // Timer hits zero: Change status and start delay timer
+            route.status = 'Departed';
+            route.departedTimer = 5; // Start 5 second delay
+            
+            // Update DOM to reflect 'Departed' status immediately
+            if (row) {
+                const timerCell = row.querySelector('.timer-cell');
+                const statusCell = row.querySelector('.status-cell');
+                timerCell.textContent = '—';
+                
+                // Update text and class for styling
+                statusCell.textContent = 'Departed';
+                statusCell.classList.remove('waiting');
+                statusCell.classList.add('departed');
+            }
+            newActiveRoutes.push(route);
+        }
+      });
+      
+      // 2. Handle structural updates (removals and additions)
+      
+      // Remove departed rows from the DOM
+      departedIds.forEach(id => {
+          const rowToRemove = tableBody.querySelector(`[data-route-id="${id}"]`);
+          if (rowToRemove) {
+              rowToRemove.remove();
+          }
+      });
+
+      // Add new routes to maintain the MAX_ACTIVE_ROUTES count
+      for (let i = 0; i < routesToReplaceCount; i++) {
+        const newRoute = createRandomRoute();
+        newActiveRoutes.push(newRoute);
+        // Append new row to the DOM
+        tableBody.appendChild(createRowElement(newRoute));
+      }
+      
+      activeRoutes = newActiveRoutes;
+      applySearchFilter();
+    }
+
+    // --- Search Filter Logic ---
+    const search = document.getElementById("search");
+    
+    function applySearchFilter() {
+        const query = search.value.toLowerCase();
+        const rows = tableBody.querySelectorAll("tr"); 
+        
+        rows.forEach(row => {
+            const rowText = row.textContent.toLowerCase();
+            row.style.display = rowText.includes(query) ? "" : "none";
+        });
+    }
+
+    // --- Initialization and User's Original Functions ---
+    
+    function rfidScan() {
+      alert("RFID Scanner Activated - Waiting for Tag...");
+    }
+    
+    window.onload = function() {
+        // Initial routes were created and rendered
+        initialRenderTable();
+        
+        // The timer loop was started
+        setInterval(updateDashboard, 1000);
+        
+        // Event listener for the search bar
+        search.addEventListener("keyup", applySearchFilter);
+    }
+  </script>
+    
+  <script src="js/logout.js"></script>
+
+</body>
+</html>
