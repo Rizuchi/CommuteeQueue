@@ -1,0 +1,148 @@
+body {
+  background-color: beige;
+  padding-top: 80px;
+}
+
+#dashboard {
+  text-align: center;
+  margin-top: 50px;
+}
+
+#dashboard h2 {
+  color: #345c2a;
+  margin-bottom: 10px;
+}
+
+#dashboard p {
+  color: #465b52;
+  margin-bottom: 30px;
+}
+
+#dashboard {
+  text-align: center;
+  margin-top: 30px;
+}
+
+#dashboard h2 {
+  color: #345c2a;
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+#dashboard p {
+  color: #465b52;
+  margin-bottom: 30px;
+}
+
+.search-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.search-container input {
+  width: 450px;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+}
+
+.search-container button {
+  background-color: #9DC183;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.search-container button:hover {
+  background-color: #7ea768;
+}
+
+.table-container {
+  margin: 0 auto 60px;
+  width: 90%;
+  overflow-x: auto;
+}
+
+#transport-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+#transport-table th,
+#transport-table td {
+  padding: 15px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+#transport-table th {
+  background-color: #9DC183;
+  color: #1a1a1a;
+  font-weight: 700;
+}
+
+#transport-table tr:hover {
+  background-color: #f3f3f3;
+}
+
+.status.waiting {
+  color: #e0a800;
+  font-weight: bold;
+}
+
+.status.departed {
+  color: #c0392b;
+  font-weight: bold;
+}
+
+.update-btn {
+  background-color: #3DD1E7;
+  color: #000;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.update-btn:hover {
+  background-color: #27b8d1;
+}
+
+.admin-btn {
+  background-color: #9DC183;
+  border: none;
+  color: white;
+  padding: 12px 20px;
+  margin: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.admin-btn:hover {
+  background-color: #7ea768;
+}
+
+.rfid-btn {
+  background-color: #3DD1E7;
+  color: black;
+  font-weight: 700;
+}
+
+.rfid-btn:hover {
+  background-color: #27b8d1;
+}
