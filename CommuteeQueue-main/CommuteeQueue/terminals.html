@@ -7,7 +7,6 @@
   <link rel="icon" type="image/x-icon" href="image/logo.png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="style.css">
-  <link rel="icon" type="image/x-icon" href="image/logo.png">
 </head>
 <body>
   
@@ -46,228 +45,312 @@
       <div class="map-placeholder">MAP IMG PLACEHOLDER</div>
       <div class="details">
         <h3>Terminal Map:</h3> <span id="popup-terminal"></span>
-        <h3>Route to the Terminal:</h3> <span id="popup-route">-</span>
+        <h3>Destination:</h3> <span id="popup-route">-</span>
       </div>
+
+      <!--  New Notification Control -->
       <div class="notify-section">
-        <button id="notify-btn">NOTIFY ME</button>
-        <div id="timer-display" class="timer-display"></div>
-        <div class="timer-controls">
-          <button class="set-timer" data-minutes="5">5 min</button>
-          <button class="set-timer" data-minutes="10">10 min</button>
-          <button class="set-timer" data-minutes="15">15 min</button>
-          <button id="stop-timer">Stop</button>
+        <label><strong>Notification Control:</strong></label>
+        
+        <div class="button-group">
+          <button id="notify-btn" class="notify-btn">
+            <i class="fa-solid fa-bell"></i> Notify Me
+          </button>
+          <button id="mute-btn" class="mute-btn">
+            <i class="fa-solid fa-bell-slash"></i> Mute
+          </button>
         </div>
+
+        <!-- Popup for mute duration -->
+        <div id="mute-options" class="mute-options">
+          <p>Mute notifications for:</p>
+          <button class="mute-time" data-minutes="15">15 mins</button>
+          <button class="mute-time" data-minutes="30">30 mins</button>
+          <button class="mute-time" data-minutes="60">1 hour</button>
+        </div>
+
+        <p id="notification-status" class="notification-status"></p>
       </div>
+
     </div>
   </div>
 
   <!-- Footer -->
   <section id="footer" class="section-p1">
     <div class="col">
-        <img class="logo" src="image/logo.png" alt="" width="60px">
-        <h4>Contact</h4>
-        <p><strong>Address:</strong> Balanga, Bataan</p>
-        <p><strong>Phone:</strong> 0991-Queue</p>
-        <p><strong>Hours:</strong> Open 25/8</p>
+      <img class="logo" src="image/logo.png" alt="" width="60px">
+      <h4>Contact</h4>
+      <p><strong>Address:</strong> Balanga, Bataan</p>
+      <p><strong>Phone:</strong> 0991-Queue</p>
+      <p><strong>Hours:</strong> Open 25/8</p>
     </div>
     <div class="col">
-        <h4>About</h4>
-        <a href="#">About Us</a>
-        <a href="#">Privacy Policy</a>
-        <a href="#">Terms & Conditions</a>
-        <a href="#">Contact Us</a>
+      <h4>About</h4>
+      <a href="#">About Us</a>
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms & Conditions</a>
+      <a href="#">Contact Us</a>
     </div>
     <div class="col install">
-        <h4>Install App</h4>
-        <p>From App Store or Google Play</p>
-        <p>Secured Payment Gateways</p>
+      <h4>Install App</h4>
+      <p>From App Store or Google Play</p>
+      <p>Secured Payment Gateways</p>
     </div>
     <div class="copyright">
-        <p>© 2025, CommuteeQueue - HTML CSS E-commerce</p>
+      <p>© 2025, CommuteeQueue - HTML CSS E-commerce</p>
     </div>
   </section>
+  
+<script>
+// === ROUTE, VEHICLE, TERMINAL DATA ===
+const destinations = [
+  "DINALUPIHAN","BAGAC","LIMAY","LAMAO","ORANI","ABUCAY","BNAS","MARIVELES",
+  "MORONG","OLONGAPO","OLONGAPO via ROMAN HIGHWAY","CUBAO","PAMPANGA","AVENIDA",
+  "SAN FERNANDO","STA. CRUZ","STO DOMINGO","STA. RITA","ARAYAT","STA. ANA",
+  "CALOOCAN","CUBAO","LA UNION","URDANETA","SISON","CARMEN","PANIQUI","GERONA",
+  "DAU","TARLAC SIESTA","BASA","SAN SIMON"
+];
 
-  <script>
-  // === ROUTE, VEHICLE, TERMINAL DATA ===
-  const destinations = [
-    "DINALUPIHAN","BAGAC","LIMAY","LAMAO","ORANI","ABUCAY","BNAS","MARIVELES",
-    "MORONG","OLONGAPO","OLONGAPO via ROMAN HIGHWAY","CUBAO","PAMPANGA","AVENIDA",
-    "SAN FERNANDO","STA. CRUZ","STO DOMINGO","STA. RITA","ARAYAT","STA. ANA",
-    "CALOOCAN","CUBAO","LA UNION","URDANETA","SISON","CARMEN","PANIQUI","GERONA",
-    "DAU","TARLAC SIESTA","BASA","SAN SIMON"
-  ];
+const vehicles = ["Bus", "Jeep", "Mini Bus", "E-Jeep"];
+const terminals = [
+  "BALANGA COMPLEX TERMINAL",
+  "VICTORY LINER BALANGA",
+  "BATAAN TRANSIT BALANGA"
+];
 
-  const vehicles = ["Bus", "Jeep", "Mini Bus", "E-Jeep"];
-  const terminals = ["BALANGA COMPLEX TERMINAL", "VICTORY LINER BALANGA", "BATAAN TRANSIT BALANGA"];
+const cardsContainer = document.getElementById("terminal-cards");
+const cardData = [];
 
-  const cardsContainer = document.getElementById("terminal-cards");
-  const cardData = [];
+// === Random departure time (1–2 mins ahead) ===
+function randomDepartureTime() {
+  const now = new Date();
+  return new Date(now.getTime() + Math.floor(Math.random() * 120 + 60) * 1000);
+}
 
-  // === Random departure time ===
-  function randomDepartureTime() {
-    const now = new Date();
-    return new Date(now.getTime() + Math.floor(Math.random() * 120) * 1000);
+// === Assign terminal based on vehicle type ===
+function assignTerminal(vehicle) {
+  if (vehicle === "Bus") {
+    const r = Math.random();
+    if (r < 0.7) return terminals[0];
+    else if (r < 0.85) return terminals[1];
+    else return terminals[2];
   }
+  return terminals[0];
+}
 
-  // === Assign terminal based on vehicle type ===
-  function assignTerminal(vehicle) {
-    if (vehicle === "Bus") {
-      const r = Math.random();
-      if (r < 0.7) return terminals[0];
-      else if (r < 0.85) return terminals[1];
-      else return terminals[2];
+// === Generate Cards ===
+function generateCards(count = 60) {
+  const shuffled = [...destinations].sort(() => 0.5 - Math.random());
+  for (let i = 0; i < count; i++) {
+    const dest = shuffled[i % shuffled.length];
+    const vehicle = vehicles[Math.floor(Math.random() * vehicles.length)];
+    const terminal = assignTerminal(vehicle);
+    const departureTime = randomDepartureTime();
+
+    const card = document.createElement("div");
+    card.classList.add("card");
+    card.innerHTML = `
+      <button class="subscribe-btn"><i class="fa-solid fa-bell"></i></button>
+      <h3>${terminal} — ${dest}</h3>
+      <p><strong>Vehicle Type:</strong> ${vehicle}</p>
+      <p><strong>Departure:</strong> <span class="departure-countdown" data-index="${i}"></span></p>
+      <p class="status waiting">Waiting</p>
+    `;
+    cardsContainer.appendChild(card);
+    cardData.push({ element: card, departureTime, terminal, dest });
+  }
+}
+generateCards(60);
+
+// === SUBSCRIPTION LOGIC (Bell per card) ===
+const subscribedCards = new Set();
+document.addEventListener("click", (e) => {
+  if (e.target.closest(".subscribe-btn")) {
+    const btn = e.target.closest(".subscribe-btn");
+    const card = btn.closest(".card");
+    if (subscribedCards.has(card)) {
+      subscribedCards.delete(card);
+      btn.classList.remove("subscribed");
+      btn.style.color = "";
+    } else {
+      subscribedCards.add(card);
+      btn.classList.add("subscribed");
+      btn.style.color = "gold";
     }
-    return terminals[0];
   }
+});
 
-  // === Generate Cards ===
-  function generateCards(count = 204) {
-    const shuffled = [...destinations].sort(() => 0.5 - Math.random());
-    for (let i = 0; i < count; i++) {
-      const dest = shuffled[i % shuffled.length];
-      const vehicle = vehicles[Math.floor(Math.random() * vehicles.length)];
-      const terminal = assignTerminal(vehicle);
-      const departureTime = randomDepartureTime();
+// === GLOBAL MUTE LOGIC ===
+let notificationsMutedUntil = null;
 
-      const card = document.createElement("div");
-      card.classList.add("card");
-      card.innerHTML = `
-        <button class="subscribe-btn"><i class="fa-solid fa-bell"></i></button>
-        <h3>${terminal} — ${dest}</h3>
-        <p><strong>Vehicle Type:</strong> ${vehicle}</p>
-        <p><strong>Departure:</strong> <span class="departure-countdown" data-index="${i}"></span></p>
-        <p class="status boarding">Boarding</p>
-      `;
-      cardsContainer.appendChild(card);
-      cardData.push({ element: card, departureTime, terminal });
-    }
-  }
+// === COUNTDOWN & STATUS LOGIC ===
+function updateCountdowns() {
+  const now = new Date();
 
-  generateCards(204);
+  cardData.forEach((data) => {
+    const { element, terminal, dest } = data;
+    const countdownEl = element.querySelector(".departure-countdown");
+    const statusEl = element.querySelector(".status");
 
-  // === Live Countdown ===
-  function updateCountdowns() {
-    const now = new Date();
-    cardData.forEach(({ element, departureTime }) => {
-      const countdownEl = element.querySelector(".departure-countdown");
-      const statusEl = element.querySelector(".status");
+    if (!data.departureTime) data.departureTime = randomDepartureTime();
+    let diff = (data.departureTime - now) / 1000;
 
-      let diff = (departureTime - now) / 1000;
-      if (diff <= 0) {
-        countdownEl.textContent = "Departed";
-        statusEl.textContent = "Departed";
-        statusEl.classList.remove("waiting");
-        statusEl.classList.add("departed");
-        return;
+    // --- Departed ---
+    if (diff <= 0 && !element.classList.contains("departed")) {
+      countdownEl.textContent = "Departed";
+      statusEl.textContent = "Departed";
+      statusEl.className = "status departed";
+      element.classList.add("departed");
+
+      if (
+        typeof pushNotification === "function" &&
+        subscribedCards.has(element) &&
+        (!notificationsMutedUntil || new Date() > notificationsMutedUntil)
+      ) {
+        pushNotification(`🚍 <strong>${terminal} – ${dest}</strong> vehicle just departed.`);
       }
 
+      setTimeout(() => {
+        data.departureTime = randomDepartureTime();
+        countdownEl.textContent = "Waiting...";
+        statusEl.textContent = "Waiting";
+        statusEl.className = "status waiting";
+        element.classList.remove("departed", "notify-soon");
+
+        if (
+          typeof pushNotification === "function" &&
+          subscribedCards.has(element) &&
+          (!notificationsMutedUntil || new Date() > notificationsMutedUntil)
+        ) {
+          pushNotification(`🕐 <strong>${terminal} – ${dest}</strong> is now waiting for the next trip.`);
+        }
+      }, 30000);
+      return;
+    }
+
+    // --- Boarding (less than 1 min left) ---
+    if (diff > 0 && diff < 60) {
+      if (!element.classList.contains("notify-soon")) {
+        element.classList.add("notify-soon");
+        statusEl.textContent = "Boarding";
+        statusEl.className = "status boarding";
+
+        if (
+          typeof pushNotification === "function" &&
+          subscribedCards.has(element) &&
+          (!notificationsMutedUntil || new Date() > notificationsMutedUntil)
+        ) {
+          pushNotification(`⚠️ <strong>${terminal} – ${dest}</strong> will depart in less than a minute!`);
+        }
+      }
+    }
+
+    // --- Normal waiting countdown ---
+    if (diff > 60) {
+      statusEl.textContent = "Waiting";
+      statusEl.className = "status waiting";
+    }
+
+    // --- Display countdown ---
+    if (diff > 0) {
       const hrs = Math.floor(diff / 3600);
       diff %= 3600;
       const mins = Math.floor(diff / 60);
       const secs = Math.floor(diff % 60);
-
       countdownEl.textContent = ` in ${hrs.toString().padStart(2, "0")}:${mins
         .toString()
         .padStart(2, "0")}:${secs.toString().padStart(2, "0")}`;
-    });
-  }
-
-  setInterval(updateCountdowns, 1000);
-  updateCountdowns();
-
-  // === POPUP LOGIC ===
-  const popup = document.getElementById("popup-window");
-  const closeBtn = document.querySelector(".close-btn");
-  const routeEl = document.getElementById("popup-route");
-  const terminalEl = document.getElementById("popup-terminal");
-  const mapPlaceholder = document.querySelector(".map-placeholder");
-
-  let timerInterval;
-  let remainingTime = 0;
-
-  document.addEventListener("click", e => {
-    if (e.target.closest(".card")) {
-      const card = e.target.closest(".card");
-      const headerText = card.querySelector("h3").innerText;
-      const [terminalName, destination] = headerText.split(" — ");
-      routeEl.textContent = destination;
-      terminalEl.textContent = terminalName;
-
-      // === Set terminal image dynamically ===
-      let imgSrc = "";
-      if (terminalName.includes("BALANGA COMPLEX")) imgSrc = "image/complex.png";
-      else if (terminalName.includes("VICTORY")) imgSrc = "image/victoryliner.png";
-      else if (terminalName.includes("BATAAN TRANSIT")) imgSrc = "image/bataantransit.png";
-      else imgSrc = "image/complex.png";
-
-      mapPlaceholder.innerHTML = `<img src="${imgSrc}" alt="${terminalName}" style="width:100%;border-radius:10px;box-shadow:0 0 8px rgba(0,0,0,0.3);">`;
-
-      popup.style.display = "flex";
     }
   });
+}
 
-  closeBtn.addEventListener("click", () => {
-    popup.style.display = "none";
-    clearInterval(timerInterval);
-    document.getElementById("timer-display").textContent = "";
-  });
+setInterval(updateCountdowns, 1000);
+updateCountdowns();
 
-  // === NOTIFY TIMER ===
-  const notifyBtn = document.getElementById("notify-btn");
-  const timerDisplay = document.getElementById("timer-display");
-  const timerButtons = document.querySelectorAll(".set-timer");
-  const stopBtn = document.getElementById("stop-timer");
+// === POPUP LOGIC ===
+const popup = document.getElementById("popup-window");
+const closeBtn = document.querySelector(".close-btn");
+const routeEl = document.getElementById("popup-route");
+const terminalEl = document.getElementById("popup-terminal");
+const mapPlaceholder = document.querySelector(".map-placeholder");
 
-  notifyBtn.addEventListener("click", () => {
-    if (remainingTime > 0) {
-      startTimer();
-    } else {
-      alert("Set a timer first!");
-    }
-  });
+let selectedCard = null;
 
-  timerButtons.forEach(btn => {
-    btn.addEventListener("click", () => {
-      remainingTime = parseInt(btn.getAttribute("data-minutes")) * 60;
-      timerDisplay.textContent = `Timer set for ${btn.getAttribute("data-minutes")} minutes`;
-    });
-  });
+document.addEventListener("click", (e) => {
+  if (e.target.closest(".card")) {
+    const card = e.target.closest(".card");
+    selectedCard = card;
+    const headerText = card.querySelector("h3").innerText;
+    const [terminalName, destination] = headerText.split(" — ");
+    routeEl.textContent = destination;
+    terminalEl.textContent = terminalName;
 
-  stopBtn.addEventListener("click", () => {
-    clearInterval(timerInterval);
-    timerDisplay.textContent = "Timer stopped.";
-    remainingTime = 0;
-  });
+    let imgSrc = "";
+    if (terminalName.includes("BALANGA COMPLEX")) imgSrc = "image/complex.png";
+    else if (terminalName.includes("VICTORY")) imgSrc = "image/victoryliner.png";
+    else if (terminalName.includes("BATAAN TRANSIT")) imgSrc = "image/bataantransit.png";
+    else imgSrc = "image/complex.png";
 
-  function startTimer() {
-    clearInterval(timerInterval);
-    timerInterval = setInterval(() => {
-      const minutes = Math.floor(remainingTime / 60);
-      const seconds = remainingTime % 60;
-      timerDisplay.textContent = `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
-      if (remainingTime <= 0) {
-        clearInterval(timerInterval);
-        alert("Time's up!");
-        timerDisplay.textContent = "";
-      }
-      remainingTime--;
-    }, 1000);
+    mapPlaceholder.innerHTML = `<img src="${imgSrc}" alt="${terminalName}" style="width:100%;border-radius:10px;box-shadow:0 0 8px rgba(0,0,0,0.3);">`;
+    popup.style.display = "flex";
   }
+});
 
-  // === Search Filter ===
-  const searchInput = document.querySelector(".search-container input");
-  searchInput.addEventListener("keyup", function () {
-    const searchValue = searchInput.value.toLowerCase();
-    const cards = document.querySelectorAll(".card");
-    cards.forEach(card => {
-      const text = card.innerText.toLowerCase();
-      card.style.display = text.includes(searchValue) ? "block" : "none";
-    });
+closeBtn.addEventListener("click", () => {
+  popup.style.display = "none";
+  selectedCard = null;
+});
+
+// === BUTTON-BASED NOTIFICATION CONTROL (Linked to Selected Card) ===
+const notifyBtn = document.getElementById("notify-btn");
+const muteBtn = document.getElementById("mute-btn");
+const muteOptions = document.getElementById("mute-options");
+const muteTimeButtons = document.querySelectorAll(".mute-time");
+const notificationStatus = document.getElementById("notification-status");
+
+let cardMuteMap = new Map();
+
+notifyBtn.addEventListener("click", () => {
+  if (!selectedCard) return;
+  if (subscribedCards.has(selectedCard)) {
+    subscribedCards.delete(selectedCard);
+    notificationStatus.textContent = "Notification disabled.";
+    notifyBtn.style.backgroundColor = "beige";
+  } else {
+    subscribedCards.add(selectedCard);
+    notificationStatus.textContent = "Notifications enabled.";
+    notifyBtn.style.backgroundColor = "lightgreen";
+  }
+});
+
+muteBtn.addEventListener("click", () => {
+  muteOptions.style.display = muteOptions.style.display === "block" ? "none" : "block";
+});
+
+muteTimeButtons.forEach(btn => {
+  btn.addEventListener("click", () => {
+    if (!selectedCard) return;
+    const minutes = parseInt(btn.getAttribute("data-minutes"));
+    const now = new Date();
+    cardMuteMap.set(selectedCard, new Date(now.getTime() + minutes * 60000));
+    muteOptions.style.display = "none";
+    notificationStatus.textContent = `🔕 Notifications muted for ${minutes} minutes for this terminal.`;
   });
+});
+
+// === Search Filter ===
+const searchInput = document.querySelector(".search-container input");
+searchInput.addEventListener("keyup", function () {
+  const searchValue = searchInput.value.toLowerCase();
+  const cards = document.querySelectorAll(".card");
+  cards.forEach((card) => {
+    const text = card.innerText.toLowerCase();
+    card.style.display = text.includes(searchValue) ? "block" : "none";
+  });
+});
 </script>
 
-
-
+<script src="notification.js"></script>
 
 </body>
 </html>
